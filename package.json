@@ -5,10 +5,16 @@
     "vscode": "^1.23.0"
   },
   "publisher": "@expressots",
-  "author": {
-    "name": "Juliano Soares",
-    "email": "juliano.soares@expresso-ts.com"
-  },
+  "contributors": [
+    {
+      "name": "Juliano Soares",
+      "email": "juliano.soares@expresso-ts.com"
+    },
+    {
+      "name": "Felipe Fontana",
+      "email": "felipe.fontana@expresso-ts.com"
+    }
+  ],
   "activationEvents": [
     "onCommand:expressots.start"
   ],
@@ -159,14 +165,14 @@
     }
   },
   "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "@types/vscode-webview": "^1.57.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "terser": "^5.15.0",
-    "yarn": "^1.22.19",
-    "vscode": "^1.1.17"
+    "vscode": "^1.1.17",
+    "yarn": "^1.22.19"
   },
-  "resolutions": {
-  },
+  "resolutions": {},
   "scripts": {
     "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
     "postinstall": "node ./node_modules/vscode/bin/install",
@@ -176,12 +182,13 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^29.5.0",
     "@types/node": "^10.1.2",
     "@types/react": "^16.3.14",
-    "@types/react-dom": "^16.0.5",
+    "@types/react-dom": "^18.0.11",
     "react-scripts": "^5.0.1",
     "rewire": "^6.0.0",
+    "tailwindcss": "^3.3.1",
     "typescript": "^3.3.1"
   },
   "browserslist": [
