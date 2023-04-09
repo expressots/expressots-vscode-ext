@@ -1,0 +1,79 @@
+{
+  "controller": {
+    "prefix": "controller",
+    "body": [
+      "import { controller, httpGet, response } from \"inversify-express-utils\";",
+      "",
+      "@controller(\"/$2\")",
+      "class $1 extends BaseController {",
+      "\tconstructor() {",
+      "\t\tsuper(\"$3\")",
+      "\t}",
+      "",
+      "\t@httpGet(\"/\")",
+      "\texecute(@response() res: any) {",
+      "\t\treturn res.send(\"Hello Expresso TS\");",
+      "\t}",
+      "}",
+      "",
+      "export { $1 };"
+    ],
+    "description": "Controller"
+  },
+  "dto": {
+    "prefix": "dto",
+    "body": [
+      "interface $1 { $2 }",
+      "",
+      "export { $1 };"
+    ],
+    "description": "DTO"
+  },
+  "usecase": {
+    "prefix": "usecase",
+    "body": [
+      "import { provide } from \"inversify-binding-decorators\";",
+      "",
+      "@provide($1)",
+      "class $1 {",
+      "\tconstructor() {}",
+      "",
+      "\texecute(): string {",
+      "\t\treturn \"your use case\";$2",
+      "\t}",
+      "}",
+      "",
+      "export { $1 };"
+    ],
+    "description": "UseCase"
+  },
+  "module": {
+    "prefix": "module",
+    "body": [
+      "import { CreateModule } from \"@expressots/core\";",
+      "",
+      "const $1 = CreateModule([",
+      "\t\t// Add your modules here",
+      "\t\t$2",
+      "]);",
+      "",
+      "export { $1 };"
+    ],
+    "description": "Module"
+  },
+  "provider": {
+    "prefix": "provider",
+    "body": [
+      "import { provide } from \"inversify-binding-decorators\";",
+      "",
+      "@provide( $1 )",
+      "class  $1  {",
+      "\tconstructor() {}",
+      "\t\t$2",
+      "}",
+      "",
+      "export {  $1  };"
+    ],
+    "description": "Provider"
+  }
+}

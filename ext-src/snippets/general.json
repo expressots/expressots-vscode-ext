@@ -1,0 +1,178 @@
+{
+	"-> TODO Comments": {
+		"prefix": "todo",
+		"body": [
+			"// TODO: ${0: comments}"
+		],
+		"description": "TODO Comments"
+	},
+	"-> REVIEW Comments": {
+		"prefix": "review",
+		"body": [
+			"// REVIEW: ${0: comments}"
+		],
+		"description": "To Review Comments"
+	},
+	"-> BUG Comments": {
+		"prefix": "bug",
+		"body": [
+			"// BUG: ${0: comments}"
+		],
+		"description": "Bug Comments"
+	},
+	"-> RESEARCH Comments": {
+		"prefix": "research",
+		"body": [
+			"// RESEARCH: ${0: comments}"
+		],
+		"description": "Research Comments"
+	},
+	"-> Console Log": {
+		"prefix": "cl",
+		"body": [
+			"console.log($0);"
+		],
+		"description": "Console Log();"
+	},
+	"-> if statement": {
+		"prefix": "if",
+		"body": [
+			"if (${1:condition})",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "Creates an if statement"
+	},
+	"-> Else statement": {
+		"prefix": "else",
+		"body": [
+			"else",
+			"{",
+			"    $0",
+			"}"
+		],
+		"description": "Else statement"
+	},
+	"-> if else statement": {
+		"prefix": "ifelse",
+		"body": [
+			"if (${1:condition})",
+			"{",
+			"\t$0",
+			"}",
+			"else",
+			"{",
+			"\t",
+			"}"
+		],
+		"description": "Creates an if else statement"
+	},
+	"-> Enum": {
+		"prefix": "enum",
+		"body": [
+			"export enum ${1:Name}",
+			"{",
+			"    $0",
+			"}"
+		],
+		"description": "Create a Enum Type"
+	},
+	"-> Switch statement": {
+		"prefix": "switch",
+		"body": [
+			"switch (${1:condition})",
+			"{",
+			"    $0",
+			"    default:",
+			"    break;",
+			"}"
+		],
+		"description": "Create a Switch statement"
+	},
+	"-> While loop": {
+		"prefix": "while",
+		"body": [
+			"while (${1:condition})",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "While loop"
+	},
+	"-> Do while loop": {
+		"prefix": "dowhile",
+		"body": [
+			"do",
+			"{",
+			"\t$0",
+			"} while (${1:condition})"
+		],
+		"description": "Creates a do while loop"
+	},
+	"-> Exception Try Catch": {
+		"prefix": "try",
+		"body": [
+			"try",
+			"{",
+			"\t$0",
+			"}",
+			"catch (${1:Exception} ${2:ex})",
+			"{",
+			"\t // TODO",
+			"}"
+		],
+		"description": "Creates a try catch block"
+	},
+	"-> Class": {
+		"prefix": "class",
+		"body": [
+			"class ${TM_FILENAME_BASE}",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "Creates a basic class"
+	},
+	"-> Class Constructor": {
+		"prefix": "ctor",
+		"body": [
+			"constructor()",
+			"{",
+			"\t$0",
+			"}"
+		],
+		"description": "Creates a constructor"
+	},
+	"-> Regex": {
+		"prefix": "regex",
+		"body": [
+			"// ********** Character Class **********",
+			"// .          any character except newline",
+			"// \\w\\d\\s     word, digit, whitespace.",
+			"// \\W\\D\\S     not word, digit, whitespace",
+			"// [abc]      any of a, b, or c",
+			"// [^abc]     not a, b, or c",
+			"// [a-g]      character between a & g",
+			"// ********** Anchors **********",
+			"// ^abc$      start / end of the string",
+			"// \\b\\B       word, not-word boundary",
+			"// ********** Escaped Characters **********",
+			"// \\.\\*\\\\     escaped special characters",
+			"// \\t\\n\\r     tab, linefeed, carriage return",
+			"// ********** Groups & Lookaround **********",
+			"// (abc)      capture group",
+			"// \\1         backreference to group #1",
+			"// (?:abc)    non-capturing group",
+			"// (?=abc)    positive lookahead,",
+			"// (?!abc)    negative lookahead",
+			"// ********** Quantifiers & Alternations **********",
+			"// a*a+a?     0 or more, 1 or more, 0 or 1",
+			"// a{5}a{2,}  exactly five, two or more",
+			"// a{1,3}     between one & three",
+			"// a+?a{2,}?  match as few as possible",
+			"// ab|cd      match ab or cd"
+		],
+		"description": "Regex cheat sheet"
+	}
+}

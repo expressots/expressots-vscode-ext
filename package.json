@@ -1,0 +1,193 @@
+{
+  "name": "expressots-vscode-ext",
+  "version": "1.0.0-dev",
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "publisher": "@expressots",
+  "author": {
+    "name": "Juliano Soares",
+    "email": "juliano.soares@expresso-ts.com"
+  },
+  "activationEvents": [
+    "onCommand:expressots.start"
+  ],
+  "main": "./build/ext-src/extension.js",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./ext-src/snippets/snippets.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./ext-src/snippets/general.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "expressots.create",
+        "title": "-> Create Project"
+      },
+      {
+        "command": "expressots.service",
+        "title": "Create Service"
+      },
+      {
+        "command": "expressots.controller",
+        "title": "Controller"
+      },
+      {
+        "command": "expressots.dto",
+        "title": "DTO"
+      },
+      {
+        "command": "expressots.module",
+        "title": "Module"
+      },
+      {
+        "command": "expressots.provider",
+        "title": "Provider"
+      },
+      {
+        "command": "expressots.usecase",
+        "title": "Usecase"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "expressots.subMenu",
+          "group": "navigation@-1"
+        }
+      ],
+      "expressots.subMenu": [
+        {
+          "command": "expressots.create"
+        },
+        {
+          "command": "expressots.controller"
+        },
+        {
+          "command": "expressots.service"
+        },
+        {
+          "command": "expressots.dto"
+        },
+        {
+          "command": "expressots.module"
+        },
+        {
+          "command": "expressots.provider"
+        },
+        {
+          "command": "expressots.usecase"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "expressots.subMenu",
+        "label": "ExpressoTS"
+      }
+    ],
+    "configuration": {
+      "title": "ExpressoTS Toolbox",
+      "properties": {
+        "expressots.multilineComments": {
+          "type": "boolean",
+          "description": "Whether the multiline comment highlighter should be active",
+          "default": true
+        },
+        "expressots.highlightPlainText": {
+          "type": "boolean",
+          "description": "Whether the plaintext comment highlighter should be active",
+          "default": false
+        },
+        "expressots.tags": {
+          "type": "array",
+          "description": "Colored comments. Select your favorite colors. Changes require a restart of VS Code to take effect",
+          "default": [
+            {
+              "tag": "bug",
+              "color": "#FF2D00",
+              "strikethrough": false,
+              "underline": false,
+              "backgroundColor": "transparent",
+              "bold": false,
+              "italic": false
+            },
+            {
+              "tag": "research",
+              "color": "#3498DB",
+              "strikethrough": false,
+              "underline": false,
+              "backgroundColor": "transparent",
+              "bold": false,
+              "italic": false
+            },
+            {
+              "tag": "//",
+              "color": "#474747",
+              "strikethrough": true,
+              "underline": false,
+              "backgroundColor": "transparent",
+              "bold": false,
+              "italic": false
+            },
+            {
+              "tag": "todo",
+              "color": "#FF8C00",
+              "strikethrough": false,
+              "underline": false,
+              "backgroundColor": "transparent",
+              "bold": false,
+              "italic": false
+            },
+            {
+              "tag": "review",
+              "color": "#B429A9",
+              "strikethrough": false,
+              "underline": false,
+              "backgroundColor": "transparent",
+              "bold": false,
+              "italic": false
+            }
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "terser": "^5.15.0",
+    "yarn": "^1.22.19",
+    "vscode": "^1.1.17"
+  },
+  "resolutions": {
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "start": "react-scripts start",
+    "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/node": "^10.1.2",
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "react-scripts": "^5.0.1",
+    "rewire": "^6.0.0",
+    "typescript": "^3.3.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
