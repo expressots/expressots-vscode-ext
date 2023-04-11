@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
+import { exec } from "child_process";
 
 /**
  * Manages react webview panels
@@ -50,9 +51,10 @@ class ReactPanel {
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
 		// Handle messages from the webview
-		this._panel.webview.onDidReceiveMessage(message => {
+		this._panel.webview.onDidReceiveMessage((message: { command: any; }) => {
 				switch (message.command) {
 					case 'createProject':
+						console.log("createProject")
 						this.createProject(message);
 						return;
 					case 'selectDirectory':
@@ -62,10 +64,11 @@ class ReactPanel {
 							canSelectFiles: false,
 							canSelectFolders: true
 						};
-
-						vscode.window.showOpenDialog(options).then(fileUri => {
+						
+						//console.log(vscode.window.activeTextEditor.document.languageId)
+						vscode.window.showOpenDialog(options).then((fileUri: { fsPath: any; }[]) => {
 							if (fileUri && fileUri[0]) {
-								this._panel!.webview.postMessage({ command: 'UPDATE_INPUT', data: fileUri[0].fsPath });
+								this._panel.webview.postMessage({ command: 'UPDATE_PROJECT_PATH', projectPath: fileUri[0].fsPath });
 							}
 						});
 						return;
@@ -94,12 +97,29 @@ class ReactPanel {
 	}
 
 	private async createProject(message: any): Promise<void> {
+		//await this.runCommandInTerminal(`cd ${message.projectPath}`);
+		await this.runCommandInTerminal(`cd  ${message.projectPath}`);
+		await this.runCommandInTerminal(`expressots new ${message.projectName} -p ${message.packageManager} -t ${message.template}`);
+		await this.runCommandInTerminal(`code .`);
+	}
+
+	async runCommandInTerminal(command: string) {
 		const terminal = vscode.window.createTerminal();
 		terminal.show();
-		terminal.sendText('cd ' + '\'' +  message.projectPath + '\'');
-		terminal.sendText('expressots new ' + message.projectName + ' -p ' + message.packageManager + ' -t ' + message.template );
-		terminal.sendText('cd ' + '\'' +  message.projectName + '\'');
-		terminal.sendText('code ' + '.');
+
+		return new Promise<void>((resolve, reject) => {
+			terminal.processId.then((pid: any) => {
+				const childProcess = exec(`kill -0 ${pid}`);
+				childProcess.on('exit', (code) => {
+					if (code === 1) {
+						resolve();
+					} else {
+						//this._panel.webview.postMessage({ command: 'COMMAND_ERROR', error: `Command "${command}" exited with code ${code}` });
+						reject(new Error(`Command "${command}" exited with code ${code}`));
+					}
+				});
+			});
+		});
 	}
 
 	private _getHtmlForWebview() {

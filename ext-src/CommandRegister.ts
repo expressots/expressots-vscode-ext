@@ -3,7 +3,6 @@ import { ContextualMenu } from './resources/contextualMenu/ContextualMenu';
 import { SmartComments } from './resources/smartComments/SmartComments';
 import { ReactPanel } from './resources/createProject/ReactPanel';
 
-
 export class CommandRegister {
 	private static _context: vscode.ExtensionContext;
 
@@ -11,7 +10,6 @@ export class CommandRegister {
 		CommandRegister._context = context;
 	}
 
-	// Initialize all commands
 	public initializeCommands(): void {
 		this.smartCommentsActivation();
 		this.registerCommands(CommandRegister._context);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { requiredFields, tabs } from "./helpers";
 import { TabItem } from "./components/TabItem";
@@ -9,11 +9,29 @@ interface FormProps {
   [key: string]: string;
 }
 
+const vsCodePlugin = (global as any).acquireVsCodeApi();
+
 const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState<FormProps>({});
   const [modalMessage, setModalMessage] = useState<string>("");
+
+  const formRef = useRef(form);
+
+  const handleMessage = (event: { data: any; }) => {
+    switch (event.data.command) {
+      case 'UPDATE_PROJECT_PATH':
+        const values = {...formRef.current,projectPath: event.data.projectPath};
+        setForm(values);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    console.log('useEffect form ', form);
+    window.addEventListener('message', handleMessage);
+  }, []);
 
   const handleChangeTab = (tabNumber: number): void => {
     if (tabNumber < currentTab) {
@@ -31,7 +49,14 @@ const App: React.FC = () => {
     setCurrentTab(tabNumber);
   };
 
+  const handleSelectDirectory = (): void => {
+    vsCodePlugin.postMessage({
+      command: "selectDirectory",
+    });
+  };
+
   const handleSubmit = (): void => {
+    console.log('handleSubmit form ', form);
     const formKeys = Object.keys(form);
     const emptyFields = requiredFields.filter(
       (field) => !formKeys.includes(field.label) || !form[field.label]
@@ -44,8 +69,7 @@ const App: React.FC = () => {
       return setCurrentTab(emptyTab.number);
     }
     setLoading(true);
-
-    const vsCodePlugin = (global as any).acquireVsCodeApi();
+    
     vsCodePlugin.postMessage({
       command: "createProject",
       ...form,
@@ -214,8 +238,11 @@ const App: React.FC = () => {
                 placeholder="/projects/my-project"
                 className="h-10 w-64 rounded border border-expresso-dark outline-none px-2 text-sm text-expresso-dark"
                 onChange={(e) => handleField("projectPath", e.target.value)}
+                value={form.projectPath || ""}
               />
-              <button className="btn border hover:bg-opacity-60 border-expresso-dark bg-expresso-blue px-2 py-1 rounded text-expresso-dark mt-3 shadow-lg">
+              <button
+                onClick={() => handleSelectDirectory()}
+                className="btn border hover:bg-opacity-60 border-expresso-dark bg-expresso-blue px-2 py-1 rounded text-expresso-dark mt-3 shadow-lg">
                 Select directory
               </button>
             </div>

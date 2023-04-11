@@ -9,7 +9,7 @@ class ContextualMenu {
     let currentPath: string;
 
     vscode.window.showInputBox({ ignoreFocusOut: true, prompt: 'Type the file name', value: 'new' + '.' + fileType + '.ts' })
-      .then((filename) => {
+      .then((filename: string) => {
         const partes = path.resolve(pathSelected).split(path.sep);
         for (let i = partes.length - 1; i >= 0; i--) {
           currentPath = partes.slice(0, i + 1).join(path.sep);
