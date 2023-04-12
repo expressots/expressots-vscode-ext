@@ -4,24 +4,24 @@ import { Parser } from './Parser';
 export class SmartComments {
 
     private context: vscode.ExtensionContext;
-    
-    constructor(context: vscode.ExtensionContext){
+
+    constructor(context: vscode.ExtensionContext) {
         this.context = context;
     }
 
-    public activateSmartComments(){
+    public activateSmartComments() {
 
         let activeEditor: vscode.TextEditor;
         let parser: Parser = new Parser();
 
         // Called to handle events below
         let updateDecorations = function (useHash = false) {
-        
+
             // if no active window is open, return
-            if (!activeEditor) {return;}
+            if (!activeEditor) { return; }
 
             // check language support
-            if (!parser.supportedLanguage) {return;}
+            if (!parser.supportedLanguage) { return; }
 
             // Finds the single line comments using the language comment delimiter
             parser.FindSingleLineComments(activeEditor);
@@ -72,7 +72,7 @@ export class SmartComments {
         // * IMPORTANT:
         // To avoid calling update too often,
         // set a timer for 200ms to wait before updating decorations
-        var timeout: NodeJS.Timer;
+        var timeout: number;
         function triggerUpdateDecorations() {
             if (timeout) {
                 clearTimeout(timeout);
