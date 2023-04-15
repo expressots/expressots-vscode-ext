@@ -17,19 +17,18 @@ const App: React.FC = () => {
   const [form, setForm] = useState<FormProps>({});
   const [modalMessage, setModalMessage] = useState<string>("");
 
-  const formRef = useRef(form);
-
   const handleMessage = (event: { data: any; }) => {
     switch (event.data.command) {
       case 'UPDATE_PROJECT_PATH':
-        const values = {...formRef.current,projectPath: event.data.projectPath};
-        setForm(values);
+        setForm((value) => ({
+          ...value,
+          projectPath: event.data.projectPath,
+        }));
         break;
     }
   };
 
   useEffect(() => {
-    console.log('useEffect form ', form);
     window.addEventListener('message', handleMessage);
   }, []);
 
@@ -56,7 +55,6 @@ const App: React.FC = () => {
   };
 
   const handleSubmit = (): void => {
-    console.log('handleSubmit form ', form);
     const formKeys = Object.keys(form);
     const emptyFields = requiredFields.filter(
       (field) => !formKeys.includes(field.label) || !form[field.label]

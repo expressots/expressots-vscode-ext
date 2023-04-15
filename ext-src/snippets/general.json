@@ -32,7 +32,7 @@
 		"body": [
 			"console.log($0);"
 		],
-		"description": "Console Log();"
+		"description": "console.log();"
 	},
 	"-> if statement": {
 		"prefix": "if",

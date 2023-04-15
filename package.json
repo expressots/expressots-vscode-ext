@@ -37,7 +37,7 @@
       },
       {
         "command": "expressots.service",
-        "title": "Create Service"
+        "title": "Service"
       },
       {
         "command": "expressots.controller",
@@ -169,7 +169,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "terser": "^5.15.0",
-    "vscode": "^1.1.17",
+    "vscode": "^1.1.37",
     "yarn": "^1.22.19"
   },
   "resolutions": {},

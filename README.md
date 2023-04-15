@@ -1,34 +1,57 @@
-# VSCode Webview React
+# Expresso TS VSCODE Extension
 
-This project was bootstrapped with 
-* [Create React App](https://github.com/facebookincubator/create-react-app)
-* [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
-* [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
+## Creating a Expresso TS project
 
-[The webview API](https://code.visualstudio.com/docs/extensions/webview) allows extensions to create customizable views within VSCode. Single Page Application frameworks are perfect fit for this use case. However, to make modern JavaScript frameworks/toolchains appeal to VSCode webview API's [security best practices](https://code.visualstudio.com/docs/extensions/webview#_security) requires some knowledge of both the bundling framework you are using and how VSCode secures webview. This project aims to provide an out-of-box starter kit for Create React App and TypeScript in VSCode's webview.
+Open the command terminal:
 
-## Development
-
-Run following commands in the terminal
-
-```shell
-yarn install --ignore-engines
-yarn run build
 ```
-And then press F5, in Extension Development Host session, run `Start React Webview` command from command palette.
+Ctrl + Shift + p
+```
 
-## Under the hood
+Enter the command:
 
-Things we did on top of Create React App TypeScript template
+```
+Create Project
+```
+<img src="./public/createProject.png" alt="Command create project" width="500">
 
-* We inline `index.html` content in `ext-src/extension.ts` when creating the webview
-* We set strict security policy for accessing resources in the webview.
-  * Only resources in `/build` can be accessed
-  * Onlu resources whose scheme is `vscode-resource` can be accessed.
-* For all resources we are going to use in the webview, we change their schemes to `vscode-resource`
-* Since we only allow local resources, absolute path for styles/images (e.g., `/static/media/logo.svg`) will not work. We add a `.env` file which sets `PUBLIC_URL` to `./` and after bundling, resource urls will be relative.
-* We add baseUrl `<base href="${vscode.Uri.file(path.join(this._extensionPath, 'build')).with({ scheme: 'vscode-resource' })}/">` and then all relative paths work.
+## Creating New Resource
 
-## Limitations
+Right-click on the directory that has an Expresso TS project and select one of the options to generate a new resource.
 
-Right now you can only run production bits (`yarn run build`) in the webview, how to make dev bits work (webpack dev server) is still unknown yet. Suggestions and PRs welcome !
+<img src="./public/createResources1.png" alt="Command create project" width="500">
+
+Enter the name of the resource name and press enter, the extension will generate the selected resource in the directory.
+
+<img src="./public/createResources.png" alt="Command create project" width="500">
+
+
+List of available resources:
+- Create Project
+- Controller
+- DTO
+- Module
+- Provider
+- Service
+- Usecase
+
+## List of availables Snippets:
+
+| Command | Action |
+| --- | --- |
+| todo | TODO Comments |
+| bug | Bug Comments |
+| review | To Review Comments |
+| reasearch | Research Comments |
+| cl | console.log(); |
+| if | Creates an if statement |
+| else | Else statement |
+| ifelse | Creates an if else statement |
+| enum | Create a Enum Type |
+| switch | Create a Switch statement |
+| while | While loop |
+| dowhile | Creates a do while loop |
+| try | Creates a try catch block |
+| class | Creates a basic class |
+| ctor | Creates a constructor |
+| regex | Regex cheat sheet |

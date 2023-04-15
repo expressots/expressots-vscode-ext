@@ -3,19 +3,17 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 class ContextualMenu {
-  // TODO: REFACTOR THIS
   public static init(uri: vscode.Uri, fileType: string) {
     let pathSelected: string = uri.fsPath;
     let currentPath: string;
 
     vscode.window.showInputBox({ ignoreFocusOut: true, prompt: 'Type the file name', value: 'new' + '.' + fileType + '.ts' })
-      .then((filename: string) => {
+      .then((filename) => {
         const partes = path.resolve(pathSelected).split(path.sep);
         for (let i = partes.length - 1; i >= 0; i--) {
           currentPath = partes.slice(0, i + 1).join(path.sep);
 
           const configPath = path.join(currentPath, "expressots.config.ts");
-          console.log('->', configPath)
           const exists = fs.existsSync(configPath);
 
           if (exists) {
@@ -31,14 +29,16 @@ class ContextualMenu {
               return;
             }
 
-            const terminal = vscode.window.createTerminal();
+            const dir = path.normalize(currentPath).split(path.sep).join('/');
+            const terminal = vscode.window.activeTerminal || vscode.window.createTerminal();
             terminal.show();
+            terminal.sendText(`cd ${dir}`);
             terminal.sendText(`expressots generate ${fileType} ${filename}`);
-          } else {
-            vscode.window.showErrorMessage("No config file found, select a location with an ExpressoTS config file.");
             return;
-          }
+          } 
         }
+        vscode.window.showErrorMessage("No config file found, select a location with an ExpressoTS config file.");
+        return;
       }
     );
   }

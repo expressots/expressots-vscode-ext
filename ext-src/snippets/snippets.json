@@ -18,7 +18,7 @@
       "",
       "export { $1 };"
     ],
-    "description": "Controller"
+    "description": "ExpressoTS - Controller"
   },
   "dto": {
     "prefix": "dto",
@@ -45,7 +45,7 @@
       "",
       "export { $1 };"
     ],
-    "description": "UseCase"
+    "description": "ExpressoTS - UseCase"
   },
   "module": {
     "prefix": "module",
@@ -59,7 +59,7 @@
       "",
       "export { $1 };"
     ],
-    "description": "Module"
+    "description": "ExpressoTS - Module"
   },
   "provider": {
     "prefix": "provider",
@@ -74,6 +74,6 @@
       "",
       "export {  $1  };"
     ],
-    "description": "Provider"
+    "description": "ExpressoTS - Provider"
   }
 }

@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { exec } from "child_process";
 
 /**
  * Manages react webview panels
@@ -33,7 +32,7 @@ class ReactPanel {
 		this._extensionPath = extensionPath;
 
 		// Create and show a new webview panel
-		this._panel = vscode.window.createWebviewPanel(ReactPanel.viewType, "React", column, {
+		this._panel = vscode.window.createWebviewPanel(ReactPanel.viewType, 'React', column, {
 			// Enable javascript in the webview
 			enableScripts: true,
 
@@ -42,7 +41,7 @@ class ReactPanel {
 				vscode.Uri.file(path.join(this._extensionPath, 'build'))
 			]
 		});
-		
+
 		// Set the webview's initial html content 
 		this._panel.webview.html = this._getHtmlForWebview();
 
@@ -52,27 +51,25 @@ class ReactPanel {
 
 		// Handle messages from the webview
 		this._panel.webview.onDidReceiveMessage((message: { command: any; }) => {
-				switch (message.command) {
-					case 'createProject':
-						console.log("createProject")
-						this.createProject(message);
-						return;
-					case 'selectDirectory':
-						const options: vscode.OpenDialogOptions = {
-							canSelectMany: false,
-							openLabel: 'Select',
-							canSelectFiles: false,
-							canSelectFolders: true
-						};
-						
-						//console.log(vscode.window.activeTextEditor.document.languageId)
-						vscode.window.showOpenDialog(options).then((fileUri: { fsPath: any; }[]) => {
-							if (fileUri && fileUri[0]) {
-								this._panel.webview.postMessage({ command: 'UPDATE_PROJECT_PATH', projectPath: fileUri[0].fsPath });
-							}
-						});
-						return;
-				}
+			switch (message.command) {
+				case 'createProject':
+					this.createProject(message);
+					return;
+				case 'selectDirectory':
+					const options: vscode.OpenDialogOptions = {
+						canSelectMany: false,
+						openLabel: 'Select',
+						canSelectFiles: false,
+						canSelectFolders: true
+					};
+
+					vscode.window.showOpenDialog(options).then((fileUri) => {
+						if (fileUri && fileUri[0]) {
+							this._panel.webview.postMessage({ command: 'UPDATE_PROJECT_PATH', projectPath: fileUri[0].fsPath });
+						}
+					});
+					return;
+			}
 		}, null, this._disposables);
 	}
 
@@ -84,7 +81,6 @@ class ReactPanel {
 
 	public dispose() {
 		ReactPanel.currentPanel = undefined;
-
 		// Clean up our resources
 		this._panel.dispose();
 
@@ -96,30 +92,14 @@ class ReactPanel {
 		}
 	}
 
-	private async createProject(message: any): Promise<void> {
-		//await this.runCommandInTerminal(`cd ${message.projectPath}`);
-		await this.runCommandInTerminal(`cd  ${message.projectPath}`);
-		await this.runCommandInTerminal(`expressots new ${message.projectName} -p ${message.packageManager} -t ${message.template}`);
-		await this.runCommandInTerminal(`code .`);
-	}
-
-	async runCommandInTerminal(command: string) {
-		const terminal = vscode.window.createTerminal();
+	async createProject(message: any): Promise<void> {
+		const dir = path.normalize(message.projectPath).split(path.sep).join('/');
+		const terminal = vscode.window.activeTerminal || vscode.window.createTerminal();
 		terminal.show();
-
-		return new Promise<void>((resolve, reject) => {
-			terminal.processId.then((pid: any) => {
-				const childProcess = exec(`kill -0 ${pid}`);
-				childProcess.on('exit', (code) => {
-					if (code === 1) {
-						resolve();
-					} else {
-						//this._panel.webview.postMessage({ command: 'COMMAND_ERROR', error: `Command "${command}" exited with code ${code}` });
-						reject(new Error(`Command "${command}" exited with code ${code}`));
-					}
-				});
-			});
-		});
+		terminal.sendText(`cd ${dir}`);
+		terminal.sendText(`expressots new ${message.projectName} -p ${message.packageManager} -t ${message.template}`);
+		terminal.sendText(`code "${message.projectName}" -r`);
+		return;
 	}
 
 	private _getHtmlForWebview() {
