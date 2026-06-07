@@ -1,34 +1,57 @@
-# VSCode Webview React
+<div align="center">
+  <a href="https://expresso-ts.com">
+    <img src="https://github.com/expressots/expressots/blob/main/media/expressots.png" alt="ExpressoTS" width="120">
+  </a>
 
-This project was bootstrapped with 
-* [Create React App](https://github.com/facebookincubator/create-react-app)
-* [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
-* [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
+  <h1>ExpressoTS VS Code Extension</h1>
 
-[The webview API](https://code.visualstudio.com/docs/extensions/webview) allows extensions to create customizable views within VSCode. Single Page Application frameworks are perfect fit for this use case. However, to make modern JavaScript frameworks/toolchains appeal to VSCode webview API's [security best practices](https://code.visualstudio.com/docs/extensions/webview#_security) requires some knowledge of both the bundling framework you are using and how VSCode secures webview. This project aims to provide an out-of-box starter kit for Create React App and TypeScript in VSCode's webview.
+  <p>VS Code extension for ExpressoTS development workflows.</p>
+
+  <p>
+    <a href="https://github.com/expressots/expressots-vscode-ext/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/expressots/expressots-vscode-ext?style=flat-square&color=181717" alt="License"></a>
+    <a href="https://discord.com/invite/PyPJfGK"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
+    <a href="https://github.com/expressots/expressots-vscode-ext/actions"><img src="https://img.shields.io/github/actions/workflow/status/expressots/expressots-vscode-ext/build.yml?branch=main&style=flat-square&logo=github&label=build" alt="Build"></a>
+  </p>
+
+  <p>
+    <a href="https://doc.expresso-ts.com">Documentation</a> ·
+    <a href="https://expresso-ts.com">Website</a> ·
+    <a href="https://github.com/orgs/expressots/projects/5">Project Board</a> ·
+    <a href="https://discord.com/invite/PyPJfGK">Community</a>
+  </p>
+</div>
+
+---
+
+## About
+
+VS Code extension for ExpressoTS development. Install from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/) or build from source in this repository.
 
 ## Development
 
-Run following commands in the terminal
-
-```shell
-yarn install --ignore-engines
-yarn run build
+```bash
+npm install
+npm run compile
 ```
-And then press F5, in Extension Development Host session, run `Start React Webview` command from command palette.
 
-## Under the hood
+Press F5 in VS Code to launch the Extension Development Host.
 
-Things we did on top of Create React App TypeScript template
+## Documentation
 
-* We inline `index.html` content in `ext-src/extension.ts` when creating the webview
-* We set strict security policy for accessing resources in the webview.
-  * Only resources in `/build` can be accessed
-  * Onlu resources whose scheme is `vscode-resource` can be accessed.
-* For all resources we are going to use in the webview, we change their schemes to `vscode-resource`
-* Since we only allow local resources, absolute path for styles/images (e.g., `/static/media/logo.svg`) will not work. We add a `.env` file which sets `PUBLIC_URL` to `./` and after bundling, resource urls will be relative.
-* We add baseUrl `<base href="${vscode.Uri.file(path.join(this._extensionPath, 'build')).with({ scheme: 'vscode-resource' })}/">` and then all relative paths work.
+For guides, API reference, architecture patterns, and examples visit **[doc.expresso-ts.com](https://doc.expresso-ts.com)**.
 
-## Limitations
+## Contributing
 
-Right now you can only run production bits (`yarn run build`) in the webview, how to make dev bits work (webpack dev server) is still unknown yet. Suggestions and PRs welcome !
+Welcome to the ExpressoTS community. See the [Contributing Guide](https://github.com/expressots/expressots/blob/main/CONTRIBUTING.md) for how to get involved.
+
+## Support the project
+
+- [GitHub Sponsors](https://github.com/sponsors/expressots)
+- [Star the organization](https://github.com/expressots) on GitHub
+- [Discord](https://discord.com/invite/PyPJfGK)
+- [Report an issue](https://github.com/expressots/expressots-vscode-ext/issues)
+
+## License
+
+MIT — see [LICENSE](./LICENSE.md).
+
