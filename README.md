@@ -5,7 +5,7 @@
 
   <h1>ExpressoTS VS Code Extension</h1>
 
-  <p>Lean VS Code extension foundation for ExpressoTS 4.x (CLI wrapper).</p>
+  <p>CLI wrapper + snippets for ExpressoTS 4.x development.</p>
 
   <p>
     <a href="https://github.com/expressots/expressots-vscode-ext/blob/main/LICENSE"><img src="https://img.shields.io/github/license/expressots/expressots-vscode-ext?style=flat-square&color=181717" alt="License"></a>
@@ -15,21 +15,13 @@
 
 ---
 
-## About
+## Features (v1)
 
-### Studio
+1. **ExpressoTS: Generate…** — pick a schematic, enter a name, runs `ex g` in the workspace and opens the created file
+2. **ExpressoTS: Open Studio** — command + status-bar button running `ex studio`
+3. **Snippets** — `ex-controller`, `ex-usecase`, `ex-provider` (`IProvider`), `ex-guard`, `ex-module` (`CreateModule`)
 
-Command **ExpressoTS: Open Studio** and status-bar **ExpressoTS Studio** run `ex studio` in a terminal.
-
-### Generate
-
-Command Palette → **ExpressoTS: Generate…** → pick schematic → name → runs `ex g` and opens the created file.
-
-### Snippets
-
-TypeScript prefixes: `ex-controller`, `ex-usecase`, `ex-provider` (`IProvider`), `ex-guard`, `ex-module` (`CreateModule`).
-
-Rescoped foundation for ExpressoTS 4.x. The legacy React/webview CRA scaffold is removed. Follow-up PRs add snippets, `ex g` Generate, Studio launcher, and vsix CI ([expressots/expressots#943](https://github.com/expressots/expressots/issues/943)).
+Requires a project created with `ex new` (4.x) and `@expressots/cli` available locally or via `npx`.
 
 ## Development
 
@@ -41,13 +33,20 @@ npm test
 
 Press **F5** in VS Code to launch the Extension Development Host.
 
+### Smoke checklist
+
+- Open a folder created with `ex new`
+- Command Palette → **ExpressoTS: Generate…** → `controller` → name → file opens
+- Status bar **ExpressoTS Studio** starts `ex studio` in a terminal
+- Type `ex-provider` / `ex-module` in a `.ts` file and expand the snippet
+
 ### Package
 
 ```bash
 npm run package
 ```
 
-Marketplace publish is done by maintainers under the `expressots` publisher.
+Produces `expressots-1.0.0.vsix`. Marketplace publish is done by maintainers under the `expressots` publisher.
 
 ## Contributing
 
