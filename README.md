@@ -5,53 +5,53 @@
 
   <h1>ExpressoTS VS Code Extension</h1>
 
-  <p>VS Code extension for ExpressoTS development workflows.</p>
+  <p>CLI wrapper + snippets for ExpressoTS 4.x development.</p>
 
   <p>
-    <a href="https://github.com/expressots/expressots-vscode-ext/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/expressots/expressots-vscode-ext?style=flat-square&color=181717" alt="License"></a>
+    <a href="https://github.com/expressots/expressots-vscode-ext/blob/main/LICENSE"><img src="https://img.shields.io/github/license/expressots/expressots-vscode-ext?style=flat-square&color=181717" alt="License"></a>
     <a href="https://discord.com/invite/PyPJfGK"><img src="https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
-    <a href="https://github.com/expressots/expressots-vscode-ext/actions"><img src="https://img.shields.io/github/actions/workflow/status/expressots/expressots-vscode-ext/build.yml?branch=main&style=flat-square&logo=github&label=build" alt="Build"></a>
-  </p>
-
-  <p>
-    <a href="https://doc.expresso-ts.com">Documentation</a> ·
-    <a href="https://expresso-ts.com">Website</a> ·
-    <a href="https://github.com/orgs/expressots/projects/5">Project Board</a> ·
-    <a href="https://discord.com/invite/PyPJfGK">Community</a>
   </p>
 </div>
 
 ---
 
-## About
+## Features (v1)
 
-VS Code extension for ExpressoTS development. Install from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/) or build from source in this repository.
+1. **ExpressoTS: Generate…** — pick a schematic, enter a name, runs `ex g` in the workspace and opens the created file
+2. **ExpressoTS: Open Studio** — command + status-bar button running `ex studio`
+3. **Snippets** — `ex-controller`, `ex-usecase`, `ex-provider` (`IProvider`), `ex-guard`, `ex-module` (`CreateModule`)
+
+Requires a project created with `ex new` (4.x) and `@expressots/cli` available locally or via `npx`.
 
 ## Development
 
 ```bash
 npm install
 npm run compile
+npm test
 ```
 
-Press F5 in VS Code to launch the Extension Development Host.
+Press **F5** in VS Code to launch the Extension Development Host.
 
-## Documentation
+### Smoke checklist
 
-For guides, API reference, architecture patterns, and examples visit **[doc.expresso-ts.com](https://doc.expresso-ts.com)**.
+- Open a folder created with `ex new`
+- Command Palette → **ExpressoTS: Generate…** → `controller` → name → file opens
+- Status bar **ExpressoTS Studio** starts `ex studio` in a terminal
+- Type `ex-provider` / `ex-module` in a `.ts` file and expand the snippet
+
+### Package
+
+```bash
+npm run package
+```
+
+Produces `expressots-1.0.0.vsix`. Marketplace publish is done by maintainers under the `expressots` publisher.
 
 ## Contributing
 
-Welcome to the ExpressoTS community. See the [Contributing Guide](https://github.com/expressots/expressots/blob/main/CONTRIBUTING.md) for how to get involved.
-
-## Support the project
-
-- [GitHub Sponsors](https://github.com/sponsors/expressots)
-- [Star the organization](https://github.com/expressots) on GitHub
-- [Discord](https://discord.com/invite/PyPJfGK)
-- [Report an issue](https://github.com/expressots/expressots-vscode-ext/issues)
+See the [ExpressoTS Contributing Guide](https://github.com/expressots/expressots/blob/main/CONTRIBUTING.md).
 
 ## License
 
-MIT — see [LICENSE](./LICENSE.md).
-
+MIT — see [LICENSE](./LICENSE).
