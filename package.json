@@ -1,7 +1,7 @@
 {
   "name": "expressots",
   "displayName": "ExpressoTS",
-  "description": "VS Code extension for ExpressoTS — CLI wrapper and TypeScript snippets for 4.x.",
+  "description": "VS Code extension for ExpressoTS — generate schematics via the CLI and TypeScript snippets.",
   "version": "1.0.0",
   "publisher": "expressots",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "scaffolding"
   ],
   "activationEvents": [
-    "workspaceContains:expressots.config.ts"
+    "workspaceContains:expressots.config.ts",
+    "onCommand:expressots.generate"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -36,6 +37,12 @@
       {
         "language": "typescript",
         "path": "./snippets/expressots.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "expressots.generate",
+        "title": "ExpressoTS: Generate..."
       }
     ]
   },

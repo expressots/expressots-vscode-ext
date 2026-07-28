@@ -17,6 +17,10 @@
 
 ## About
 
+### Generate
+
+Command Palette → **ExpressoTS: Generate…** → pick schematic → name → runs `ex g` and opens the created file.
+
 ### Snippets
 
 TypeScript prefixes: `ex-controller`, `ex-usecase`, `ex-provider` (`IProvider`), `ex-guard`, `ex-module` (`CreateModule`).
