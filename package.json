@@ -1,200 +1,48 @@
 {
-  "name": "expressots-vscode-ext",
-  "version": "1.0.0-dev",
-  "engines": {
-    "vscode": "^1.23.0"
+  "name": "expressots",
+  "displayName": "ExpressoTS",
+  "description": "VS Code extension for ExpressoTS — CLI wrapper and TypeScript snippets for 4.x.",
+  "version": "1.0.0",
+  "publisher": "expressots",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressots/expressots-vscode-ext"
   },
-  "publisher": "@expressots",
-  "contributors": [
-    {
-      "name": "Juliano Soares",
-      "email": "juliano.soares@expresso-ts.com"
-    },
-    {
-      "name": "Felipe Fontana",
-      "email": "felipe.fontana@expresso-ts.com"
-    }
+  "bugs": {
+    "url": "https://github.com/expressots/expressots-vscode-ext/issues"
+  },
+  "homepage": "https://expresso-ts.com",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "expressots",
+    "express",
+    "typescript",
+    "nodejs",
+    "scaffolding"
   ],
   "activationEvents": [
-    "onCommand:expressots.start"
+    "workspaceContains:expressots.config.ts"
   ],
-  "main": "./build/ext-src/extension.js",
-  "contributes": {
-    "snippets": [
-      {
-        "language": "typescript",
-        "path": "./ext-src/snippets/snippets.json"
-      },
-      {
-        "language": "typescript",
-        "path": "./ext-src/snippets/general.json"
-      }
-    ],
-    "commands": [
-      {
-        "command": "expressots.create",
-        "title": "-> Create Project"
-      },
-      {
-        "command": "expressots.service",
-        "title": "Create Service"
-      },
-      {
-        "command": "expressots.controller",
-        "title": "Controller"
-      },
-      {
-        "command": "expressots.dto",
-        "title": "DTO"
-      },
-      {
-        "command": "expressots.module",
-        "title": "Module"
-      },
-      {
-        "command": "expressots.provider",
-        "title": "Provider"
-      },
-      {
-        "command": "expressots.usecase",
-        "title": "Usecase"
-      }
-    ],
-    "menus": {
-      "explorer/context": [
-        {
-          "submenu": "expressots.subMenu",
-          "group": "navigation@-1"
-        }
-      ],
-      "expressots.subMenu": [
-        {
-          "command": "expressots.create"
-        },
-        {
-          "command": "expressots.controller"
-        },
-        {
-          "command": "expressots.service"
-        },
-        {
-          "command": "expressots.dto"
-        },
-        {
-          "command": "expressots.module"
-        },
-        {
-          "command": "expressots.provider"
-        },
-        {
-          "command": "expressots.usecase"
-        }
-      ]
-    },
-    "submenus": [
-      {
-        "id": "expressots.subMenu",
-        "label": "ExpressoTS"
-      }
-    ],
-    "configuration": {
-      "title": "ExpressoTS Toolbox",
-      "properties": {
-        "expressots.multilineComments": {
-          "type": "boolean",
-          "description": "Whether the multiline comment highlighter should be active",
-          "default": true
-        },
-        "expressots.highlightPlainText": {
-          "type": "boolean",
-          "description": "Whether the plaintext comment highlighter should be active",
-          "default": false
-        },
-        "expressots.tags": {
-          "type": "array",
-          "description": "Colored comments. Select your favorite colors. Changes require a restart of VS Code to take effect",
-          "default": [
-            {
-              "tag": "bug",
-              "color": "#FF2D00",
-              "strikethrough": false,
-              "underline": false,
-              "backgroundColor": "transparent",
-              "bold": false,
-              "italic": false
-            },
-            {
-              "tag": "research",
-              "color": "#3498DB",
-              "strikethrough": false,
-              "underline": false,
-              "backgroundColor": "transparent",
-              "bold": false,
-              "italic": false
-            },
-            {
-              "tag": "//",
-              "color": "#474747",
-              "strikethrough": true,
-              "underline": false,
-              "backgroundColor": "transparent",
-              "bold": false,
-              "italic": false
-            },
-            {
-              "tag": "todo",
-              "color": "#FF8C00",
-              "strikethrough": false,
-              "underline": false,
-              "backgroundColor": "transparent",
-              "bold": false,
-              "italic": false
-            },
-            {
-              "tag": "review",
-              "color": "#B429A9",
-              "strikethrough": false,
-              "underline": false,
-              "backgroundColor": "transparent",
-              "bold": false,
-              "italic": false
-            }
-          ]
-        }
-      }
-    }
-  },
-  "dependencies": {
-    "@types/vscode-webview": "^1.57.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "terser": "^5.15.0",
-    "vscode": "^1.1.17",
-    "yarn": "^1.22.19"
-  },
-  "resolutions": {},
+  "main": "./out/extension.js",
+  "contributes": {},
   "scripts": {
-    "vscode:prepublish": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "start": "react-scripts start",
-    "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --no-dependencies",
+    "test": "npm run compile && node ./out/test/cli.test.js",
+    "lint": "tsc -p ./ --noEmit"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.0",
-    "@types/node": "^10.1.2",
-    "@types/react": "^16.3.14",
-    "@types/react-dom": "^18.0.11",
-    "react-scripts": "^5.0.1",
-    "rewire": "^6.0.0",
-    "tailwindcss": "^3.3.1",
-    "typescript": "^3.3.1"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.0",
+    "typescript": "^5.3.3"
+  }
 }
