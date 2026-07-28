@@ -17,6 +17,10 @@
 
 ## About
 
+### Snippets
+
+TypeScript prefixes: `ex-controller`, `ex-usecase`, `ex-provider` (`IProvider`), `ex-guard`, `ex-module` (`CreateModule`).
+
 Rescoped foundation for ExpressoTS 4.x. The legacy React/webview CRA scaffold is removed. Follow-up PRs add snippets, `ex g` Generate, Studio launcher, and vsix CI ([expressots/expressots#943](https://github.com/expressots/expressots/issues/943)).
 
 ## Development

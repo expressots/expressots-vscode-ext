@@ -17,6 +17,7 @@
     "vscode": "^1.85.0"
   },
   "categories": [
+    "Snippets",
     "Other"
   ],
   "keywords": [
@@ -30,7 +31,14 @@
     "workspaceContains:expressots.config.ts"
   ],
   "main": "./out/extension.js",
-  "contributes": {},
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/expressots.json"
+      }
+    ]
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

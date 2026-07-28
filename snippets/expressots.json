@@ -1,0 +1,98 @@
+{
+  "ExpressoTS Controller": {
+    "prefix": "ex-controller",
+    "body": [
+      "import { controller, Get } from \"@expressots/adapter-express\";",
+      "import { inject } from \"@expressots/core\";",
+      "import { ${1:Name}UseCase } from \"./${2:name}.usecase\";",
+      "",
+      "@controller(\"/${3:route}\")",
+      "export class ${1:Name}Controller {",
+      "\t@inject(${1:Name}UseCase) private ${4:name}UseCase: ${1:Name}UseCase;",
+      "",
+      "\t@Get(\"/\")",
+      "\texecute() {",
+      "\t\treturn this.${4:name}UseCase.execute();",
+      "\t}",
+      "}"
+    ],
+    "description": "ExpressoTS controller with injected use case"
+  },
+  "ExpressoTS Use Case": {
+    "prefix": "ex-usecase",
+    "body": [
+      "import { provide } from \"@expressots/core\";",
+      "",
+      "@provide(${1:Name}UseCase)",
+      "export class ${1:Name}UseCase {",
+      "\texecute() {",
+      "\t\treturn \"${2:Use Case}\";",
+      "\t}",
+      "}"
+    ],
+    "description": "ExpressoTS use case"
+  },
+  "ExpressoTS Provider": {
+    "prefix": "ex-provider",
+    "body": [
+      "import { IProvider, provideSingleton } from \"@expressots/core\";",
+      "",
+      "@provideSingleton(${1:Name}Provider)",
+      "export class ${1:Name}Provider implements IProvider {",
+      "\treadonly name = \"${2:Provider Name}\";",
+      "\treadonly version = \"${3:1.0.0}\";",
+      "\treadonly description = \"${4:Description}\";",
+      "}"
+    ],
+    "description": "ExpressoTS IProvider skeleton"
+  },
+  "ExpressoTS Guard": {
+    "prefix": "ex-guard",
+    "body": [
+      "import { provide } from \"@expressots/core\";",
+      "import { Request, Response, NextFunction } from \"express\";",
+      "",
+      "/**",
+      " * ${1:Name} Guard",
+      " *",
+      " * Usage:",
+      " * @controller(\"/protected\")",
+      " * @Use(${1:Name}Guard)",
+      " * export class ProtectedController { }",
+      " */",
+      "@provide(${1:Name}Guard)",
+      "export class ${1:Name}Guard {",
+      "\tcanActivate(req: Request, res: Response, next: NextFunction): void {",
+      "\t\tconst isAuthorized = this.checkAuthorization(req);",
+      "",
+      "\t\tif (!isAuthorized) {",
+      "\t\t\tres.status(401).json({ message: \"Unauthorized\" });",
+      "\t\t\treturn;",
+      "\t\t}",
+      "",
+      "\t\tnext();",
+      "\t}",
+      "",
+      "\tprivate checkAuthorization(req: Request): boolean {",
+      "\t\tconst authHeader = req.headers.authorization;",
+      "\t\tif (!authHeader) {",
+      "\t\t\treturn false;",
+      "\t\t}",
+      "\t\treturn true;",
+      "\t}",
+      "}"
+    ],
+    "description": "ExpressoTS guard"
+  },
+  "ExpressoTS Module": {
+    "prefix": "ex-module",
+    "body": [
+      "import { CreateModule, ContainerModule } from \"@expressots/core\";",
+      "",
+      "export const ${1:Name}Module: ContainerModule = CreateModule([",
+      "\t$0",
+      "]);"
+    ],
+    "description": "ExpressoTS CreateModule"
+  }
+}
