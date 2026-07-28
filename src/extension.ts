@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { generateCommand } from "./commands/generate";
+import { createStudioStatusBar, studioCommand } from "./commands/studio";
 
 let output: vscode.OutputChannel;
 
@@ -12,6 +13,12 @@ export function activate(context: vscode.ExtensionContext): void {
       generateCommand(output),
     ),
   );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("expressots.studio", () => studioCommand()),
+  );
+
+  createStudioStatusBar(context);
 }
 
 export function deactivate(): void {

@@ -17,6 +17,10 @@
 
 ## About
 
+### Studio
+
+Command **ExpressoTS: Open Studio** and status-bar **ExpressoTS Studio** run `ex studio` in a terminal.
+
 ### Generate
 
 Command Palette → **ExpressoTS: Generate…** → pick schematic → name → runs `ex g` and opens the created file.

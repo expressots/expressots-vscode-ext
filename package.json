@@ -1,7 +1,7 @@
 {
   "name": "expressots",
   "displayName": "ExpressoTS",
-  "description": "VS Code extension for ExpressoTS — generate schematics via the CLI and TypeScript snippets.",
+  "description": "VS Code extension for ExpressoTS — generate schematics via the CLI, launch Studio, and TypeScript snippets.",
   "version": "1.0.0",
   "publisher": "expressots",
   "license": "MIT",
@@ -29,7 +29,8 @@
   ],
   "activationEvents": [
     "workspaceContains:expressots.config.ts",
-    "onCommand:expressots.generate"
+    "onCommand:expressots.generate",
+    "onCommand:expressots.studio"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -43,6 +44,10 @@
       {
         "command": "expressots.generate",
         "title": "ExpressoTS: Generate..."
+      },
+      {
+        "command": "expressots.studio",
+        "title": "ExpressoTS: Open Studio"
       }
     ]
   },
